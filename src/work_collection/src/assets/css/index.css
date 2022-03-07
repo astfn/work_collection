@@ -1,0 +1,62 @@
+@import "./normalize.css";
+
+:root {
+  /* 参考 antDesign 配色 */
+  --color1: #fffaf0;
+  --color2: #fff5e6;
+  --color3: #ffe3bd;
+  --color4: #ffcf94;
+  --color5: #ffb86b;
+  --color6: #ff9f43; /* 主颜色 */
+  --color7: #d97b2e;
+  --color8: #b35b1d;
+  --color9: #8c3f0f;
+  --color10: #662a0a;
+  --box-shadow-shallow: rgba(255, 255, 255, 0.6);
+  --box-shadow-deep: rgba(0, 0, 0, 0.2);
+}
+/* 主题过渡类 */
+.ts-box_shadow {
+  transition: box-shadow 0.6s;
+}
+.ts-bg {
+  transition: background 0.6s;
+}
+
+/* 全局样式 */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  user-select: none;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+#main {
+  flex: 1;
+  overflow-y: auto;
+  color: #2c3e50;
+  background-color: var(--color4);
+}
+
+#main::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+#main::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
