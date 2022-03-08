@@ -40,7 +40,7 @@
       <div class="show-myself-box ts-box_shadow">
         <aside>
           <h3>某次音乐赛</h3>
-          <div class="video-box" v-show="isShowVideo">
+          <div class="video-box">
             <video
               :poster="require('@/assets/images/video-cover/演唱-意外.jpg')"
               :src="require('@/assets/videos/演唱-意外.mp4')"
@@ -51,7 +51,7 @@
 
         <aside>
           <h3>跑酷</h3>
-          <div class="video-box" v-show="isShowVideo">
+          <div class="video-box">
             <video
               :poster="require('@/assets/images/video-cover/团侧.jpg')"
               :src="require('@/assets/videos/团侧.mp4')"
@@ -62,7 +62,7 @@
 
         <aside>
           <h3>参与国家教育部 #青春为祖国歌唱# 活动</h3>
-          <div class="video-box" v-show="isShowVideo">
+          <div class="video-box">
             <video
               :poster="
                 require('@/assets/images/video-cover/青春为祖国歌唱.jpg')
@@ -96,23 +96,7 @@
     },
     setup() {
       const { avatar, WeChat, lifeHobbys, workhobbys } = profile;
-
-      /* 
-          解决移动端某些浏览器bug：
-            进入该页面后，并播放视频。
-            再次跳转到其它页面后，视频依旧出现。
-      */
-      let isShowVideo = ref(true);
-      onActivated(() => {
-        isShowVideo.value = true;
-        console.log(isShowVideo.value);
-      });
-      onDeactivated(() => {
-        isShowVideo.value = false;
-        console.log(isShowVideo.value);
-      });
-
-      return { avatar, WeChat, workhobbys, lifeHobbys, isShowVideo };
+      return { avatar, WeChat, workhobbys, lifeHobbys };
     },
   });
 </script>
