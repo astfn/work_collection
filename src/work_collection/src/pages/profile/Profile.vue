@@ -40,25 +40,37 @@
       <div class="show-myself-box ts-box_shadow">
         <aside>
           <h3>某次音乐赛</h3>
-          <video
-            :poster="require('@/assets/images/video-cover/演唱-意外.jpg')"
-            :src="require('@/assets/videos/演唱-意外.mp4')"
-            controls
-          ></video>
+          <div class="video-box" v-show="isShowVideo">
+            <video
+              :poster="require('@/assets/images/video-cover/演唱-意外.jpg')"
+              :src="require('@/assets/videos/演唱-意外.mp4')"
+              controls
+            />
+          </div>
         </aside>
 
         <aside>
           <h3>跑酷</h3>
-          <video :src="require('@/assets/videos/团侧.mp4')" controls></video>
+          <div class="video-box" v-show="isShowVideo">
+            <video
+              :poster="require('@/assets/images/video-cover/团侧.jpg')"
+              :src="require('@/assets/videos/团侧.mp4')"
+              controls
+            />
+          </div>
         </aside>
 
         <aside>
           <h3>参与国家教育部 #青春为祖国歌唱# 活动</h3>
-          <video
-            :poster="require('@/assets/images/video-cover/青春为祖国歌唱.jpg')"
-            src="https://apd-8ed691b24490ae9d362ff539affeca538c77774ab81b8cd3.v.smtcdns.com/om.tc.qq.com/ATdKXdfPBmFHUVMxMfqpokniSNZgPbkm1eqZD_PiNl10/uwMROfz2r57BIaQXGdGnC2deB3dUr_IkisDvBob9yrMGODlR/svp_50001/szg_56638081_50001_22375bcb5c544c1a9acfce960110661c.f622.mp4?sdtfrom=v1010&guid=d5110d9db7ed2cd0ed6059336cbd90ed&vkey=7443B8104A833188FE8F69A829074F7E906C07632335B74FE6205880BEFA8222B4554E525E1F0669B030B47B5562AB8554CDE6518811AC557090C65F2809A5B7EC700005E298F83F1786253C4B065BDF577D80C0131B770DD9D30420C2771CD68A7C2EDBE76FE7AD095164EFA485CA5681E23B3F383F29D4401DF28CE36422E028A96D96D8A10C09"
-            controls
-          ></video>
+          <div class="video-box" v-show="isShowVideo">
+            <video
+              :poster="
+                require('@/assets/images/video-cover/青春为祖国歌唱.jpg')
+              "
+              :src="require('@/assets/videos/青春为祖国歌唱.mp4')"
+              controls
+            />
+          </div>
         </aside>
       </div>
 
@@ -73,7 +85,7 @@
   </div>
 </template>
 <script>
-  import { defineComponent } from "vue";
+  import { defineComponent, ref, onActivated, onDeactivated } from "vue";
   import TitleBar from "components/titlebar/TitleBar.vue";
 
   import { profile } from "common/local-data.js";
@@ -85,7 +97,22 @@
     setup() {
       const { avatar, WeChat, lifeHobbys, workhobbys } = profile;
 
-      return { avatar, WeChat, workhobbys, lifeHobbys };
+      /* 
+          解决移动端某些浏览器bug：
+            进入该页面后，并播放视频。
+            再次跳转到其它页面后，视频依旧出现。
+      */
+      let isShowVideo = ref(true);
+      onActivated(() => {
+        isShowVideo.value = true;
+        console.log(isShowVideo.value);
+      });
+      onDeactivated(() => {
+        isShowVideo.value = false;
+        console.log(isShowVideo.value);
+      });
+
+      return { avatar, WeChat, workhobbys, lifeHobbys, isShowVideo };
     },
   });
 </script>
@@ -173,9 +200,16 @@
       h3 {
         text-align: center;
       }
-      video {
+      .video-box {
         margin: 10px;
+        padding: 10px;
         border-radius: 10px;
+        box-shadow: 0px 0px 5px 0px var(--color6);
+
+        video {
+          width: 100%;
+          border-radius: 10px;
+        }
       }
     }
   }
