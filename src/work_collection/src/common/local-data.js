@@ -45,6 +45,12 @@ export const works = [
     desc: "",
   },
   {
+    name: "greedy_snake",
+    link: "https://astfn.github.io/greedy_snake",
+    imageSrc: require("@/assets/images/icons/works/greedy_snake.png"),
+    desc: "",
+  },
+  {
     name: "AshunTodoList",
     link: "https://astfn.github.io/AshunToDoList/",
     imageSrc: require("@/assets/images/icons/works/ashun_todo_list.png"),
